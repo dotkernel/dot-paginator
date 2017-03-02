@@ -37,7 +37,7 @@ class MapperAdapter implements AdapterInterface
     public function __construct(MapperInterface $mapper, array $options = [])
     {
         $this->mapper = $mapper;
-        $this->options = $options;
+        $this->options = $options ?? [];
     }
 
     /**
@@ -48,8 +48,7 @@ class MapperAdapter implements AdapterInterface
     public function getItems($offset, $itemCountPerPage): array
     {
         $options = $this->options;
-        $options['conditions'] = $options['conditions'] ?? [];
-        $options['conditions'] += [
+        $options += [
             'offset' => $offset,
             'limit' => $itemCountPerPage
         ];
