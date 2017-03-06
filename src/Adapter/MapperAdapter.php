@@ -53,7 +53,9 @@ class MapperAdapter implements AdapterInterface
             'limit' => $itemCountPerPage
         ];
 
-        return $this->mapper->find('all', $options);
+        $finder = $options['finder'] ?? 'all';
+
+        return $this->mapper->find($finder, $options);
     }
 
     /**
