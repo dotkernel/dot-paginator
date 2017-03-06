@@ -98,7 +98,9 @@ class DbMapperAdapter implements AdapterInterface, MapperEventListenerInterface
                 $options = $this->options;
                 $finder = $options['finder'] ?? 'all';
 
-                $this->countSelect = $this->getMapper()->find($finder, $options);
+                // because we have set the isCountSelect flag, the mapper will stop in the onBeforeFind event
+                // this will result in initializing the countSelect
+                $this->getMapper()->find($finder, $options);
                 $this->isCountSelect = false;
             }
 
@@ -130,7 +132,7 @@ class DbMapperAdapter implements AdapterInterface, MapperEventListenerInterface
 
         if ($this->isCountSelect) {
             // returning something !== null in this event will stop the mapper from fetching data
-            return $this->countSelect;
+            return [];
         }
 
         return null;
