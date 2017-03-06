@@ -48,6 +48,8 @@ class DbMapperAdapter implements AdapterInterface, MapperEventListenerInterface
     {
         $this->mapper = $mapper;
         $this->options = $options ?? [];
+
+        $this->attach($mapper->getEventManager(), -1000);
     }
 
     /**
