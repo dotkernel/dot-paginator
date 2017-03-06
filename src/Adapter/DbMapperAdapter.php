@@ -11,16 +11,23 @@ declare(strict_types = 1);
 
 namespace Dot\Paginator\Adapter;
 
-use Dot\Ems\Mapper\MapperInterface;
+use Dot\Ems\Event\MapperEvent;
+use Dot\Ems\Event\MapperEventListenerInterface;
+use Dot\Ems\Event\MapperEventListenerTrait;
+use Dot\Ems\Mapper\AbstractDbMapper;
+use Zend\Db\Sql\Expression;
+use Zend\Db\Sql\Select;
 use Zend\Paginator\Adapter\AdapterInterface;
 
 /**
  * Class MapperAdapter
  * @package Dot\Paginator\Adapter
  */
-class MapperAdapter implements AdapterInterface
+class DbMapperAdapter implements AdapterInterface, MapperEventListenerInterface
 {
-    /** @var  MapperInterface */
+    use MapperEventListenerTrait;
+
+    /** @var  AbstractDbMapper */
     protected $mapper;
 
     /** @var array  */
@@ -29,12 +36,15 @@ class MapperAdapter implements AdapterInterface
     /** @var  int */
     protected $rowCount;
 
+    /** @var  Select */
+    protected $countSelect;
+
     /**
-     * MapperAdapter constructor.
-     * @param MapperInterface $mapper
+     * DbMapperAdapter constructor.
+     * @param AbstractDbMapper $mapper
      * @param array $options
      */
-    public function __construct(MapperInterface $mapper, array $options = [])
+    public function __construct(AbstractDbMapper $mapper, array $options = [])
     {
         $this->mapper = $mapper;
         $this->options = $options ?? [];
@@ -65,27 +75,45 @@ class MapperAdapter implements AdapterInterface
     {
         if (!$this->rowCount) {
             $this->rowCount = 0;
-            $result = $this->mapper->find('count', $this->options);
-            if (!empty($result)) {
-                $this->rowCount = (int) $result[0]['count'];
-            }
+
+            $sql = $this->getMapper()->getSql();
+            $stmt = $sql->prepareStatementForSqlObject($this->countSelect);
+            $result = $stmt->execute();
+
+            $this->rowCount = (int) $result->current()['count'];
         }
 
         return $this->rowCount;
     }
 
     /**
-     * @return MapperInterface
+     * @param MapperEvent $e
      */
-    public function getMapper(): MapperInterface
+    public function onBeforeFind(MapperEvent $e)
+    {
+        $select = $e->getParam('select');
+        if ($select instanceof Select) {
+            $this->countSelect = clone $select;
+            $this->countSelect->reset(Select::LIMIT);
+            $this->countSelect->reset(Select::OFFSET);
+            $this->countSelect->reset(Select::ORDER);
+
+            $this->countSelect->columns(['count' => new Expression('COUNT(1)')]);
+        }
+    }
+
+    /**
+     * @return AbstractDbMapper
+     */
+    public function getMapper(): AbstractDbMapper
     {
         return $this->mapper;
     }
 
     /**
-     * @param MapperInterface $mapper
+     * @param AbstractDbMapper $mapper
      */
-    public function setMapper(MapperInterface $mapper)
+    public function setMapper(AbstractDbMapper $mapper)
     {
         $this->mapper = $mapper;
     }

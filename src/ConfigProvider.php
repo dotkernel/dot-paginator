@@ -11,9 +11,9 @@ declare(strict_types = 1);
 
 namespace Dot\Paginator;
 
-use Dot\Paginator\Adapter\MapperAdapter;
+use Dot\Paginator\Adapter\DbMapperAdapter;
 use Dot\Paginator\Factory\AdapterPluginManagerFactory;
-use Dot\Paginator\Factory\MapperAdapterFactory;
+use Dot\Paginator\Factory\DbMapperAdapterFactory;
 use Dot\Paginator\Factory\ScrollingStylePluginManagerFactory;
 use Zend\Paginator\AdapterPluginManager;
 use Zend\Paginator\ScrollingStylePluginManager;
@@ -32,12 +32,12 @@ class ConfigProvider
             'dot_paginator' => [
                 'adaptor_manager' => [
                     'factories' => [
-                        MapperAdapter::class => MapperAdapterFactory::class,
+                        DbMapperAdapter::class => DbMapperAdapterFactory::class,
                     ],
                     'aliases' => [
-                        'mapperadapter' => MapperAdapter::class,
-                        'mapperAdapter' => MapperAdapter::class,
-                        'MapperAdapter' => MapperAdapter::class,
+                        'dbmapperadapter' => DbMapperAdapter::class,
+                        'dbMapperAdapter' => DbMapperAdapter::class,
+                        'DbMapperAdapter' => DbMapperAdapter::class,
                     ]
                 ],
                 'scrolling_style_manager' => [],
