@@ -13,7 +13,7 @@ namespace Dot\Paginator\Factory;
 
 use Dot\Ems\Mapper\MapperInterface;
 use Dot\Ems\Mapper\MapperManager;
-use Dot\Paginator\Adapter\DbMapperAdapter;
+use Dot\Paginator\Adapter\MapperAdapter;
 use Interop\Container\ContainerInterface;
 use Zend\ServiceManager\Exception\ServiceNotCreatedException;
 
@@ -21,14 +21,14 @@ use Zend\ServiceManager\Exception\ServiceNotCreatedException;
  * Class MapperAdapterFactory
  * @package Dot\Paginator\Factory
  */
-class DbMapperAdapterFactory
+class MapperAdapterFactory
 {
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
         if (empty($options)) {
             throw new ServiceNotCreatedException(sprintf(
                 '%s requires a minimum of dot-ems MapperInterface instance or name',
-                DbMapperAdapter::class
+                MapperAdapter::class
             ));
         }
 
