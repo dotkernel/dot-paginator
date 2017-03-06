@@ -36,8 +36,14 @@ class DbMapperAdapter implements AdapterInterface, MapperEventListenerInterface
     /** @var  int */
     protected $rowCount;
 
+    /** @var array  */
+    protected $items;
+
     /** @var  Select */
     protected $countSelect;
+
+    /** @var bool  */
+    protected $isCountSelect = false;
 
     /**
      * DbMapperAdapter constructor.
@@ -59,6 +65,12 @@ class DbMapperAdapter implements AdapterInterface, MapperEventListenerInterface
      */
     public function getItems($offset, $itemCountPerPage): array
     {
+        $this->isCountSelect = false;
+
+        if ($this->items) {
+            return $this->items;
+        }
+
         $options = $this->options;
         $options += [
             'offset' => $offset,
@@ -67,7 +79,9 @@ class DbMapperAdapter implements AdapterInterface, MapperEventListenerInterface
 
         $finder = $options['finder'] ?? 'all';
 
-        return $this->mapper->find($finder, $options);
+        $this->items = $this->mapper->find($finder, $options);
+
+        return $this->items;
     }
 
     /**
@@ -77,6 +91,16 @@ class DbMapperAdapter implements AdapterInterface, MapperEventListenerInterface
     {
         if (!$this->rowCount) {
             $this->rowCount = 0;
+
+            if (!$this->countSelect) {
+                $this->isCountSelect = true;
+
+                $options = $this->options;
+                $finder = $options['finder'] ?? 'all';
+
+                $this->countSelect = $this->getMapper()->find($finder, $options);
+                $this->isCountSelect = false;
+            }
 
             $sql = $this->getMapper()->getSql();
             $stmt = $sql->prepareStatementForSqlObject($this->countSelect);
@@ -90,6 +114,7 @@ class DbMapperAdapter implements AdapterInterface, MapperEventListenerInterface
 
     /**
      * @param MapperEvent $e
+     * @return mixed|Select
      */
     public function onBeforeFind(MapperEvent $e)
     {
@@ -102,6 +127,13 @@ class DbMapperAdapter implements AdapterInterface, MapperEventListenerInterface
 
             $this->countSelect->columns(['count' => new Expression('COUNT(1)')]);
         }
+
+        if ($this->isCountSelect) {
+            // returning something !== null in this event will stop the mapper from fetching data
+            return $this->countSelect;
+        }
+
+        return null;
     }
 
     /**
