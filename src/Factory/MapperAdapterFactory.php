@@ -11,8 +11,8 @@ declare(strict_types = 1);
 
 namespace Dot\Paginator\Factory;
 
-use Dot\Ems\Mapper\MapperInterface;
-use Dot\Ems\Mapper\MapperManager;
+use Dot\Mapper\Mapper\MapperInterface;
+use Dot\Mapper\Mapper\MapperManager;
 use Dot\Paginator\Adapter\MapperAdapter;
 use Interop\Container\ContainerInterface;
 use Zend\ServiceManager\Exception\ServiceNotCreatedException;
@@ -33,7 +33,7 @@ class MapperAdapterFactory
         }
 
         $mapper = isset($options['mapper'])
-            && (is_string($options['mapper']) || $options['mapper'] instanceof MapperInterface)
+        && (is_string($options['mapper']) || $options['mapper'] instanceof MapperInterface)
             ? $options['mapper']
             : null;
 

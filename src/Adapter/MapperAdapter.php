@@ -11,8 +11,8 @@ declare(strict_types = 1);
 
 namespace Dot\Paginator\Adapter;
 
-use Dot\Ems\Mapper\AbstractDbMapper;
-use Dot\Ems\Mapper\MapperInterface;
+use Dot\Mapper\Mapper\AbstractDbMapper;
+use Dot\Mapper\Mapper\MapperInterface;
 use Zend\Paginator\Adapter\AdapterInterface;
 
 /**
@@ -24,13 +24,13 @@ class MapperAdapter implements AdapterInterface
     /** @var  AbstractDbMapper */
     protected $mapper;
 
-    /** @var array  */
+    /** @var array */
     protected $options = [];
 
     /** @var  int */
     protected $rowCount;
 
-    /** @var array  */
+    /** @var array */
     protected $items;
 
     /**

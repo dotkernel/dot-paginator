@@ -1,7 +1,7 @@
 {
   "name": "dotkernel/dot-paginator",
   "type": "library",
-  "description": "Paginator component for dotkernel based on zend-paginator",
+  "description": "DotKernel paginator component extending and customizing zend-paginator",
   "license": "MIT",
   "authors": [
     {
@@ -20,21 +20,8 @@
     "squizlabs/php_codesniffer": "^2.3",
     "zendframework/zend-db": "^2.8",
 
-    "dotkernel/dot-ems": "dev-reworked as 0.6.x-dev",
-    "dotkernel/dot-hydrator": "0.6.x-dev",
-    "dotkernel/dot-event": "dev-develop as 0.6.x-dev",
-    "dotkernel/dot-helpers": "dev-develop as 0.6.x-dev"
+    "dotkernel/dot-mapper": "~0.1"
   },
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "https://github.com/dotkernel/dot-ems"
-    },
-    {
-      "type": "vcs",
-      "url": "https://github.com/dotkernel/dot-hydrator"
-    }
-  ],
   "autoload": {
     "psr-4": {
       "Dot\\Paginator\\": "src/"
@@ -47,7 +34,7 @@
   },
   "extra": {
     "branch-alias": {
-      "dev-master": "0.6-dev"
+      "dev-master": "1.1-dev"
     }
   }
 }
