@@ -1,10 +1,8 @@
 <?php
 /**
- * @copyright: DotKernel
- * @library: dot-paginator
- * @author: n3vrax
- * Date: 2/28/2017
- * Time: 10:06 PM
+ * @see https://github.com/dotkernel/dot-paginator/ for the canonical source repository
+ * @copyright Copyright (c) 2017 Apidemia (https://www.apidemia.com)
+ * @license https://github.com/dotkernel/dot-paginator/blob/master/LICENSE.md MIT License
  */
 
 declare(strict_types = 1);
