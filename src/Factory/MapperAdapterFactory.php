@@ -12,7 +12,7 @@ namespace Dot\Paginator\Factory;
 use Dot\Mapper\Mapper\MapperInterface;
 use Dot\Mapper\Mapper\MapperManager;
 use Dot\Paginator\Adapter\MapperAdapter;
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
 use Zend\ServiceManager\Exception\ServiceNotCreatedException;
 
 /**
