@@ -10,7 +10,7 @@ declare(strict_types = 1);
 namespace Dot\Paginator\Factory;
 
 use Psr\Container\ContainerInterface;
-use Zend\Paginator\AdapterPluginManager;
+use Laminas\Paginator\AdapterPluginManager;
 
 /**
  * Class AdaptorPluginManagerFactory

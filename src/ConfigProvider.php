@@ -13,8 +13,8 @@ use Dot\Paginator\Adapter\MapperAdapter;
 use Dot\Paginator\Factory\AdapterPluginManagerFactory;
 use Dot\Paginator\Factory\MapperAdapterFactory;
 use Dot\Paginator\Factory\ScrollingStylePluginManagerFactory;
-use Zend\Paginator\AdapterPluginManager;
-use Zend\Paginator\ScrollingStylePluginManager;
+use Laminas\Paginator\AdapterPluginManager;
+use Laminas\Paginator\ScrollingStylePluginManager;
 
 /**
  * Class ConfigProvider

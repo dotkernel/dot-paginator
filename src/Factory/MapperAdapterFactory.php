@@ -13,7 +13,7 @@ use Dot\Mapper\Mapper\MapperInterface;
 use Dot\Mapper\Mapper\MapperManager;
 use Dot\Paginator\Adapter\MapperAdapter;
 use Psr\Container\ContainerInterface;
-use Zend\ServiceManager\Exception\ServiceNotCreatedException;
+use Laminas\ServiceManager\Exception\ServiceNotCreatedException;
 
 /**
  * Class MapperAdapterFactory

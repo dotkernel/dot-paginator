@@ -1,40 +1,40 @@
 {
-  "name": "dotkernel/dot-paginator",
-  "type": "library",
-  "description": "DotKernel paginator component extending and customizing zend-paginator",
-  "license": "MIT",
-  "authors": [
-    {
-      "name": "n3vrax",
-      "email": "tibi@apidemia.com"
+    "name": "dotkernel/dot-paginator",
+    "type": "library",
+    "description": "DotKernel paginator component extending and customizing laminas-paginator",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "n3vrax",
+            "email": "tibi@apidemia.com"
+        }
+    ],
+    "require": {
+        "php": "^7.2",
+        "laminas/laminas-servicemanager": "^3.3.0",
+        "laminas/laminas-paginator": "^2.7",
+        "laminas/laminas-dependency-plugin": "^1.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^4.8",
+        "squizlabs/php_codesniffer": "^2.3",
+        "laminas/laminas-db": "^2.8",
+        "dotkernel/dot-mapper": "^2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Dot\\Paginator\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "DotTest\\Paginator\\": "test/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.0-dev",
+            "dev-develop": "2.1-dev"
+        }
     }
-  ],
-  "require": {
-    "php": "^7.1",
-    "zendframework/zend-servicemanager": "^3.3.0",
-    "zendframework/zend-paginator": "^2.7"
-  },
-  "require-dev": {
-    "phpunit/phpunit": "^4.8",
-    "squizlabs/php_codesniffer": "^2.3",
-    "zendframework/zend-db": "^2.8",
-
-    "dotkernel/dot-mapper": "^0.3"
-  },
-  "autoload": {
-    "psr-4": {
-      "Dot\\Paginator\\": "src/"
-    }
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "DotTest\\Paginator\\": "test/"
-    }
-  },
-  "extra": {
-    "branch-alias": {
-      "dev-master": "1.2-dev",
-      "dev-develop": "1.3-dev"
-    }
-  }
 }
