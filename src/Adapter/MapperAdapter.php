@@ -11,7 +11,7 @@ namespace Dot\Paginator\Adapter;
 
 use Dot\Mapper\Mapper\AbstractDbMapper;
 use Dot\Mapper\Mapper\MapperInterface;
-use Zend\Paginator\Adapter\AdapterInterface;
+use Laminas\Paginator\Adapter\AdapterInterface;
 
 /**
  * Class MapperAdapter
