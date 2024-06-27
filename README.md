@@ -1,5 +1,9 @@
 # dot-paginator
 
+> [!IMPORTANT]
+> dot-paginator is a wrapper on top of [laminas-paginator](https://github.com/laminas/laminas-paginator)
+>
+> ![OSS Lifecycle](https://img.shields.io/osslifecycle/laminas/laminas-paginator)
 
 ![OSS Lifecycle](https://img.shields.io/osslifecycle/dotkernel/dot-paginator)
 ![PHP from Packagist (specify version)](https://img.shields.io/packagist/php-v/dotkernel/dot-paginator/2.9.2)
